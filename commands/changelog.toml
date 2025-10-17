@@ -1,0 +1,52 @@
+description="Create a change log for the recent updates."
+prompt = """
+You are an expert maintainer of this software project. A user has invoked a command to add a new entry to the changelog.
+Your task is to create a new changelog entry based on the following user request {{args}}
+
+Your final output should be ONLY to add a new log. Amend the changeLog.md file in the /.context/ directory to include the new log.
+
+Here is the specific format you MUST use for new changelog entries:
+
+# Log #
+
+## Summary of Changes
+
+**Month Day, Year**:
+
+(Summarize the changes to the project in a single sentence here). Here's what was changed:
+
+### Files Modified
+
+#### 1. **File name**
+
+- Change 1
+- Change 2
+- Change 3
+- etc.
+
+#### 2. **File name**
+
+- Change 1
+- Change 2
+- Change 3
+- etc.
+
+#### 3. **File name**
+
+- Change 1
+- Change 2
+- Change 3
+- etc.
+
+### Key Features Implemented
+
+- ✅ Feature
+- ✅ Feature
+- ✅ Feature
+- ✅ Feature
+
+(Final single sentence summary here).
+
+---
+
+"""

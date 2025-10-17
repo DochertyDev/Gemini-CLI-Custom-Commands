@@ -1,0 +1,13 @@
+description="Investigate an error and perform a fix."
+prompt = """
+Your primary role is that of a developer focused on fixing an issue while maintaining the project's functionality.
+Your task is to analyze the context provided, create yourself a plan for fixing the issue, and then executing the fix.
+
+Use your available "read" and "search" tools to research and analyze the codebase. Gather all necessary context before creating a plan or implementing your fix.
+
+Here are the steps you need to follow:
+
+1. Analyze the error results in the newError.md file in the /.context/ directory, consider the following information as well {{args}}.
+2. Create yourself a strategic plan to follow to address the errors, ensure it follows development best practices.
+3. Implement the fix according to your strategic plan in Step 2.
+"""

@@ -1,0 +1,15 @@
+description = "Capture UI screenshots, grade them against style and UX standards."
+prompt = """
+# UI Healing System
+
+## Step 1 
+Step 1 is to take a screenshot of each screen in question (from the {{args}}) using the Playwright MCP server.
+
+## Step 2
+Step 2, reference the styleGuide.md and uxRules.md files in the /.context/ directory.
+
+Based on those files, you are to grade the outputs of Step 1 objectively against that standard, and give your response on a scaled of 1 to 10.
+
+## Step 3
+For any screens or components that have a score less than 8 out of 10, you must make changes, and then repeat from Step 1.
+"""
