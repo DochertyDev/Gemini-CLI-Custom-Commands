@@ -1,6 +1,6 @@
 # Custom Command Configuration
 
-This directory contains the `.toml` files that define custom commands for the Gemini CLI. These commands often reference a `.context` directory, which is expected to exist in the root of your project.
+This directory contains the `.toml` files that define custom commands for the Gemini CLI. These commands often reference a `.context` directory, which is expected to exist in the root of your project (it is not included in this repo).
 
 ## The `.context` Directory
 
