@@ -1,57 +1,70 @@
-description = "Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase."
+description = "Generates a Mermaid.js diagram to visualize project structure at a high level by analyzing the codebase."
 prompt = """
-Your primary role is that of a software architect and analyst. Your task is to generate a Mermaid.js diagram representing the project's structure by investigating the codebase.
+Your primary role is that of a software architect and analyst. Your task is to generate a HIGH-LEVEL Mermaid.js diagram representing the project's architecture by investigating the codebase.
 
 Additional context from user (if provided): {{args}}
 
-You will investigate the codebase and generate a text-based diagram definition. You must not make any changes to the existing code.
+You will investigate the codebase and generate a text-based diagram definition focusing on architectural components rather than individual files. You must not make any changes to the existing code.
 
 Here are the steps you MUST follow:
 
 1.  **Determine Scope:**
-    *   By default, analyze the entire project to create a comprehensive dependencies visualization.
-    *   If `{{args}}` specifies a particular directory, file pattern, or aspect of the codebase (e.g., "focus on the API layer", "only src/components"), adjust your analysis scope accordingly.
-    *   If `{{args}}` mentions a specific diagram type (e.g., "component relationships", "class diagram"), adapt the visualization style while maintaining Mermaid.js format.
+    *   By default, analyze the entire project to create a high-level architectural overview.
+    *   If `{{args}}` specifies a particular directory, component, or aspect of the codebase, adjust your analysis scope accordingly.
+    *   If `{{args}}` requests more granular detail, you may increase the level of detail, but default to holistic views.
 
 2.  **Codebase Investigation:**
-    *   Use the `glob` and `read_many_files` tools to discover and read all relevant source files within the determined scope.
-    *   Focus on file types relevant to the project's language (e.g., `.js`, `.jsx`, `.ts`, `.tsx`, `.py`, `.java`, `.go`).
-    *   Examine the project structure, identifying key directories and architectural patterns.
+    *   Use the `glob` and `read_many_files` tools to discover and read relevant source files within the determined scope.
+    *   Focus on understanding the overall project structure: main directories, their purposes, and how they relate to each other.
+    *   Identify architectural patterns (e.g., MVC, microservices, layered architecture).
 
-3.  **Build Dependency Graph:**
-    *   For each file, parse its content to find relationships by searching for `import`, `require`, `from`, or other dependency statements relevant to the language.
-    *   Construct an internal graph data structure where each file is a "node" and each dependency is an "edge" (a directed link from the importing file to the imported file).
-    *   Identify and highlight key architectural components, entry points, and heavily connected modules.
+3.  **Build Component-Level Architecture:**
+    *   **Think in terms of MODULES and LAYERS, not individual files.**
+    *   Group related files into logical components based on their directory structure and purpose (e.g., "Authentication Module", "API Layer", "UI Components", "Database Layer").
+    *   Identify the PRIMARY relationships between these high-level components.
+    *   Focus on showing data flow and dependencies between major architectural pieces.
+    *   **LIMIT the diagram to 8-15 major components maximum** to ensure readability.
 
 4.  **Generate Mermaid Diagram:**
-    *   Convert your internal graph structure into valid Mermaid.js syntax.
-    *   The graph direction should be Top-Down (`graph TD;`).
-    *   Use `subgraph` blocks to visually group files by their parent directories, creating a clean and organized layout.
-    *   Assign a short, unique ID to each file node and use the file's path as its visible label (e.g., `ID["path/to/file.js"]`).
-    *   For large projects, prioritize showing the most important dependencies and architectural boundaries to keep the diagram readable.
+    *   Convert your component-level architecture into valid Mermaid.js syntax.
+    *   Use `graph LR;` (Left-to-Right) or `graph TD;` (Top-Down) depending on what makes the architecture clearest.
+    *   Each node should represent a COMPONENT or LAYER, not an individual file (e.g., `Auth["Authentication Module"]` instead of individual auth files).
+    *   Use descriptive labels that convey purpose (e.g., "User Interface", "Business Logic", "Data Access").
+    *   Only show the most important connections between components.
+    *   Consider using different arrow styles to indicate different relationship types:
+      *   `-->` for standard dependencies
+      *   `-.->` for optional/conditional dependencies
+      *   `==>` for data flow
 
 5.  **Create Output File:**
     *   Create a new file named `visualizationDiagram.md` in the /.context/ directory (or update it if it already exists).
     *   Your final output MUST be the creation of this file, containing only the complete Mermaid.js code inside a markdown code block.
 
-Example of final output structure:
+Example of HIGH-LEVEL output structure:
 ```mermaid
 graph TD;
-    subgraph "src"
-        subgraph "api"
-            ApiClient["api/client.js"]
-        end
-        subgraph "components"
-            UserProfile["components/UserProfile.js"]
-        end
-        subgraph "utils"
-            Logger["utils/logger.js"]
-        end
-    end
+    UI[User Interface Layer]
+    API[API Layer]
+    Auth[Authentication Module]
+    BL[Business Logic]
+    DB[Database Layer]
+    Cache[Caching Layer]
 
-    UserProfile --> ApiClient;
-    ApiClient --> Logger;
+    UI --> API
+    API --> Auth
+    API --> BL
+    Auth -.-> DB
+    BL --> DB
+    BL --> Cache
+    Cache -.-> DB
 ```
+
+**CRITICAL GUIDELINES FOR READABILITY:**
+- Treat directories as components, not containers of individual files
+- Maximum 15 nodes in the entire diagram
+- Each node represents a conceptual module or layer
+- Only show dependencies between major components
+- Prioritize clarity over completeness
 
 Your final output should ONLY be this visualization. Create (or update if one exists) a `visualizationDiagram.md` file in the /.context/ directory.
 """
