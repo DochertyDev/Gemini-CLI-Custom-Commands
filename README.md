@@ -56,6 +56,7 @@ Here are the custom commands included in this repository:
 - `/error`
 - `/performance`
 - `/plan`
+- `/security`
 - `/uiheal`
 
 ## Contributing

@@ -7,6 +7,7 @@ This directory contains all the custom commands that can be used with the Gemini
 - **`error.toml`**: Investigate an error and perform a fix.
 - **`performance.toml`**: Analyzes the code for potential performance bottlenecks and suggests optimizations.
 - **`plan.toml`**: Investigates and creates a strategic plan to accomplish a task.
+- **`security.toml`**: Performs a comprehensive security audit and generates a vulnerability report.
 - **`uiheal.toml`**: Capture UI screenshots, grade them against style and UX standards.
 
 ---
