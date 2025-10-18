@@ -7,7 +7,8 @@ You are an expert Software Architect your role is to work with the product owner
 ### Input 
 
 1. Rerence the `productRequirementsDocument.md` and `userInterfaceDesignDocument.md` files in the /.context/ directory.
-2. Consider additional context for the user (if applicable): {{args}}
+2. Ask the developer what language and frameworks they want to use (unless specified here: {{args}}).
+3. Consider additional context for the user (if applicable): {{args}}
 
 ### Instructions
 
