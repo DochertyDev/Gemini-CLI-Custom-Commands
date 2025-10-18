@@ -58,6 +58,7 @@ Here are the custom commands included in this repository:
 - `/plan`
 - `/security`
 - `/uiheal`
+- `/visualize`
 
 ## Contributing
 

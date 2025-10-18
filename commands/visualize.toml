@@ -1,0 +1,57 @@
+description = "Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase."
+prompt = """
+Your primary role is that of a software architect and analyst. Your task is to generate a Mermaid.js diagram representing the project's structure by investigating the codebase.
+
+Additional context from user (if provided): {{args}}
+
+You will investigate the codebase and generate a text-based diagram definition. You must not make any changes to the existing code.
+
+Here are the steps you MUST follow:
+
+1.  **Determine Scope:**
+    *   By default, analyze the entire project to create a comprehensive dependencies visualization.
+    *   If `{{args}}` specifies a particular directory, file pattern, or aspect of the codebase (e.g., "focus on the API layer", "only src/components"), adjust your analysis scope accordingly.
+    *   If `{{args}}` mentions a specific diagram type (e.g., "component relationships", "class diagram"), adapt the visualization style while maintaining Mermaid.js format.
+
+2.  **Codebase Investigation:**
+    *   Use the `glob` and `read_many_files` tools to discover and read all relevant source files within the determined scope.
+    *   Focus on file types relevant to the project's language (e.g., `.js`, `.jsx`, `.ts`, `.tsx`, `.py`, `.java`, `.go`).
+    *   Examine the project structure, identifying key directories and architectural patterns.
+
+3.  **Build Dependency Graph:**
+    *   For each file, parse its content to find relationships by searching for `import`, `require`, `from`, or other dependency statements relevant to the language.
+    *   Construct an internal graph data structure where each file is a "node" and each dependency is an "edge" (a directed link from the importing file to the imported file).
+    *   Identify and highlight key architectural components, entry points, and heavily connected modules.
+
+4.  **Generate Mermaid Diagram:**
+    *   Convert your internal graph structure into valid Mermaid.js syntax.
+    *   The graph direction should be Top-Down (`graph TD;`).
+    *   Use `subgraph` blocks to visually group files by their parent directories, creating a clean and organized layout.
+    *   Assign a short, unique ID to each file node and use the file's path as its visible label (e.g., `ID["path/to/file.js"]`).
+    *   For large projects, prioritize showing the most important dependencies and architectural boundaries to keep the diagram readable.
+
+5.  **Create Output File:**
+    *   Create a new file named `visualizationDiagram.md` in the /.context/ directory (or update it if it already exists).
+    *   Your final output MUST be the creation of this file, containing only the complete Mermaid.js code inside a markdown code block.
+
+Example of final output structure:
+```mermaid
+graph TD;
+    subgraph "src"
+        subgraph "api"
+            ApiClient["api/client.js"]
+        end
+        subgraph "components"
+            UserProfile["components/UserProfile.js"]
+        end
+        subgraph "utils"
+            Logger["utils/logger.js"]
+        end
+    end
+
+    UserProfile --> ApiClient;
+    ApiClient --> Logger;
+```
+
+Your final output should ONLY be this visualization. Create (or update if one exists) a `visualizationDiagram.md` file in the /.context/ directory.
+"""

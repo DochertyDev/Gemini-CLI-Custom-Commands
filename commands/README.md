@@ -9,6 +9,7 @@ This directory contains all the custom commands that can be used with the Gemini
 - **`plan.toml`**: Investigates and creates a strategic plan to accomplish a task.
 - **`security.toml`**: Performs a comprehensive security audit and generates a vulnerability report.
 - **`uiheal.toml`**: Capture UI screenshots, grade them against style and UX standards.
+- **`visualize.toml`**: Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase.
 
 ---
 
