@@ -1,32 +1,44 @@
-# Custom Command Configuration
+# Available Commands
+
+This directory contains all the custom commands that can be used with the Gemini CLI. Each `.toml` file defines a specific command.
+
+- **`changelog.toml`**: Create a change log for the recent updates.
+- **`dockerize.toml`**: Generates a Dockerfile and docker-compose.yml for the project.
+- **`error.toml`**: Investigate an error and perform a fix.
+- **`plan.toml`**: Investigates and creates a strategic plan to accomplish a task.
+- **`uiheal.toml`**: Capture UI screenshots, grade them against style and UX standards.
+
+---
+
+## Custom Command Configuration
 
 This directory contains the `.toml` files that define custom commands for the Gemini CLI. These commands often reference a `.context` directory, which is expected to exist in the root of your project (it is not included in this repo).
 
-## The `.context` Directory
+### The `.context` Directory
 
 The `.context` directory serves as a dedicated workspace for the Gemini CLI, holding template files that provide context or store output for various commands. This allows the CLI to operate on a set of known files without cluttering your project's root directory.
 
 Below are the files commonly referenced by the commands and their intended purpose:
 
-### `changeLog.md`
+#### `changeLog.md`
 
 - **Purpose**: Stores a running log of project changes.
 - **Used By**: The `changelog` command.
 - **Description**: This file is amended by the `changelog` command to include a summary of recent code modifications, new features, and bug fixes, maintaining a history of the project's evolution.
 
-### `newError.md`
+#### `newError.md`
 
 - **Purpose**: Captures the details of an error for investigation.
 - **Used By**: The `error` command.
 - **Description**: When you encounter a bug or an error, its output or description should be placed in this file. The `error` command then uses this context to begin its debugging and resolution process.
 
-### `newTaskInstructions.md`
+#### `newTaskInstructions.md`
 
 - **Purpose**: Holds the strategic plan for a new task or feature.
 - **Used By**: The `plan` command.
 - **Description**: The `plan` command generates a detailed, step-by-step strategic plan to address a user's goal. This plan is written to `newTaskInstructions.md` to guide the subsequent implementation work.
 
-### `styleGuide.md` & `uxRules.md`
+#### `styleGuide.md` & `uxRules.md`
 
 - **Purpose**: Define the visual and user experience standards for a project.
 - **Used By**: The `uiheal` command.

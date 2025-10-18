@@ -1,0 +1,33 @@
+description = "Generates a Dockerfile and docker-compose.yml for the project."
+prompt = """
+Your primary role is that of a DevOps specialist. You must analyze the project structure to create a production-ready Docker configuration.
+
+Your task is to create a Dockerfile and docker-compose.yml for the current project based on your analysis of the project structure. Consider the following requests (if applicable): {{args}}
+
+Here are the steps you MUST follow:
+
+1.  **Analyze Project Structure:**
+    *   Investigate the project to determine the language, framework, and package manager. Look for files like `package.json`, `requirements.txt`, `pyproject.toml`, `pom.xml`, `build.gradle`, etc.
+    *   Identify the application's entry point (e.g., `server.js`, `app.py`).
+    *   Note any build steps required (e.g., `npm run build`).
+
+2.  **Ask for Clarification (If Necessary):**
+    *   If the project structure is ambiguous or key information (like the start command or exposed port) is missing, you MUST ask the user for clarification before proceeding.
+
+3.  **Generate Dockerfile:**
+    *   Create a multi-stage `Dockerfile`.
+    *   Use official, slim base images where possible (e.g., `node:18-alpine`).
+    *   The first stage should be for installing dependencies and building the application (if applicable).
+    *   The final stage should copy only the necessary built artifacts and production dependencies, resulting in a small, secure image.
+    *   Ensure you expose the correct port.
+
+4.  **Generate docker-compose.yml:**
+    *   Create a `docker-compose.yml` file.
+    *   Define a service for the main application, building from the `Dockerfile` in the current directory.
+    *   Map the container port to a host port (e.g., `8080:3000`).
+    *   Set up a volume to mount the source code into the container for live-reloading during development (`.:/app`).
+    *   Add `restart: unless-stopped`.
+
+5.  **Final Output:**
+    *   You will create two new files in the root of the project: `Dockerfile` and `docker-compose.yml`. Do not place them in any sub-directory.
+"""
