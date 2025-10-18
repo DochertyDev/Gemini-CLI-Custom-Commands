@@ -27,37 +27,54 @@ Here are the steps you MUST follow:
 
 4.  **Generate Mermaid Diagram:**
     *   Convert your component-level architecture into valid Mermaid.js syntax.
-    *   Use `graph LR;` (Left-to-Right) or `graph TD;` (Top-Down) depending on what makes the architecture clearest.
-    *   Each node should represent a COMPONENT or LAYER, not an individual file (e.g., `Auth["Authentication Module"]` instead of individual auth files).
+    *   **IMPORTANT: Use a simple graph WITHOUT nested subgraphs. Define all nodes first, then define relationships.**
+    *   Use `graph TD;` (Top-Down) or `graph LR;` (Left-to-Right) depending on what makes the architecture clearest.
+    *   Each node should represent a COMPONENT or LAYER, not an individual file.
     *   Use descriptive labels that convey purpose (e.g., "User Interface", "Business Logic", "Data Access").
+    *   You may use styling to group related components visually, but avoid complex nesting.
     *   Only show the most important connections between components.
     *   Consider using different arrow styles to indicate different relationship types:
       *   `-->` for standard dependencies
       *   `-.->` for optional/conditional dependencies
       *   `==>` for data flow
+    *   **Use proper Mermaid syntax: Always end lines with semicolons and ensure node definitions are complete before connections.**
 
 5.  **Create Output File:**
     *   Create a new file named `visualizationDiagram.md` in the /.context/ directory (or update it if it already exists).
     *   Your final output MUST be the creation of this file, containing only the complete Mermaid.js code inside a markdown code block.
 
-Example of HIGH-LEVEL output structure:
+Example of HIGH-LEVEL output structure (CORRECT FORMAT):
 ```mermaid
 graph TD;
-    UI[User Interface Layer]
-    API[API Layer]
-    Auth[Authentication Module]
-    BL[Business Logic]
-    DB[Database Layer]
-    Cache[Caching Layer]
+    UI[User Interface Layer];
+    API[API Layer];
+    Auth[Authentication Module];
+    BL[Business Logic];
+    DB[Database Layer];
+    Cache[Caching Layer];
+    External[External Services];
 
-    UI --> API
-    API --> Auth
-    API --> BL
-    Auth -.-> DB
-    BL --> DB
-    BL --> Cache
-    Cache -.-> DB
+    UI --> API;
+    API --> Auth;
+    API --> BL;
+    Auth -.-> DB;
+    BL --> DB;
+    BL --> Cache;
+    Cache -.-> DB;
+    BL --> External;
+
+    style UI fill:#e1f5ff;
+    style API fill:#fff4e1;
+    style DB fill:#f0f0f0;
 ```
+
+**CRITICAL SYNTAX RULES TO AVOID ERRORS:**
+- Do NOT use nested subgraphs with nodes inside them
+- Define ALL nodes at the top with their labels
+- Then define ALL connections/relationships
+- End each line with a semicolon
+- Use simple node syntax: `NodeID[Label];`
+- Keep it flat and simple - use styling for visual grouping instead of subgraphs
 
 **CRITICAL GUIDELINES FOR READABILITY:**
 - Treat directories as components, not containers of individual files
