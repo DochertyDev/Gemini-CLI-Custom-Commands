@@ -6,6 +6,12 @@ This directory contains all the custom commands that can be used with the Gemini
 
 - **`build/dockerize.toml`**: Generates a Dockerfile and docker-compose.yml for the project.
 
+### Design
+
+- **`design/PRD`**: Creates a Product Requirements Document.
+- **`design/SRSD`**: Creates a Software Requirements Specification Document.
+- **`design/UIDD`**: Creates a User Interface Design Document.
+
 ### Document
 
 - **`document/changelog.toml`**: Create a change log for the recent updates.

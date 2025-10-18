@@ -55,6 +55,12 @@ Here are the custom commands included in this repository, organized by category:
 
 - `/build:dockerize` - Generates a Dockerfile and docker-compose.yml for the project.
 
+### Design
+
+- `/design:PRD` - Creates a Product Requirements Document.
+- `/design:SRSD` - Creates a Software Requirements Specification Document.
+- `/design:UIDD` - Creates a User Interface Design Document.
+
 ### Document
 
 - `/document:changelog` - Create a change log for the recent updates.
