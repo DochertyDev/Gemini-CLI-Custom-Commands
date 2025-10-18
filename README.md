@@ -52,6 +52,7 @@ This method will only make the commands available for the current project.
 Here are the custom commands included in this repository:
 
 - `/changelog`
+- `/dockerize`
 - `/error`
 - `/plan`
 - `/uiheal`

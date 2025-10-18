@@ -1,3 +1,15 @@
+# Available Commands
+
+This directory contains all the custom commands that can be used with the Gemini CLI. Each `.toml` file defines a specific command.
+
+- **`changelog.toml`**: Create a change log for the recent updates.
+- **`dockerize.toml`**: Generates a Dockerfile and docker-compose.yml for the project.
+- **`error.toml`**: Investigate an error and perform a fix.
+- **`plan.toml`**: Investigates and creates a strategic plan to accomplish a task.
+- **`uiheal.toml`**: Capture UI screenshots, grade them against style and UX standards.
+
+---
+
 # Custom Command Configuration
 
 This directory contains the `.toml` files that define custom commands for the Gemini CLI. These commands often reference a `.context` directory, which is expected to exist in the root of your project (it is not included in this repo).
