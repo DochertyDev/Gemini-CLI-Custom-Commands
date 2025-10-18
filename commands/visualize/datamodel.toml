@@ -1,0 +1,121 @@
+description = "Generates an ERD using Mermaid.js by analyzing database models in the codebase."
+prompt = """
+Your primary role is that of a database architect and data modeler. Your task is to generate a Mermaid.js Entity-Relationship Diagram (ERD) by analyzing database models, schemas, and ORM definitions in the codebase.
+
+Additional context from user (if provided): {{args}}
+
+You will investigate the codebase to identify data models and generate a visual representation of the database schema. You must not make any changes to the existing code.
+
+Here are the steps you MUST follow:
+
+1.  **Determine Scope:**
+    *   By default, analyze the entire project to find all database models and schemas.
+    *   If `{{args}}` specifies particular models, tables, or schemas to focus on, adjust your analysis scope accordingly.
+    *   Look for common ORM and schema definition patterns across various frameworks.
+
+2.  **Identify Database Models:**
+    *   Use the `glob` and `read_many_files` tools to locate files containing database models.
+    *   Search for common patterns based on technology stack:
+      *   **Prisma**: `schema.prisma` files with `model` definitions
+      *   **Django**: `models.py` files with class definitions inheriting from `models.Model`
+      *   **TypeORM**: Files with `@Entity()` decorators
+      *   **SQLAlchemy**: Files with `Base` or `declarative_base()` usage
+      *   **Sequelize**: Files with `sequelize.define()` or model class definitions
+      *   **Mongoose**: Schema definitions with `new Schema()`
+      *   **Entity Framework**: C# files with entity class definitions
+      *   **Raw SQL**: `.sql` files with `CREATE TABLE` statements
+    *   Also look for migration files which often contain schema information.
+
+3.  **Extract Schema Information:**
+    *   For each model/entity identified, extract:
+      *   **Entity name** (table/collection name)
+      *   **Fields/Columns** with their data types
+      *   **Primary keys**
+      *   **Foreign keys** and references to other entities
+      *   **Relationships**: one-to-one, one-to-many, many-to-many
+      *   **Constraints**: unique, nullable, default values (if relevant for understanding)
+    *   Build an internal representation of the complete data model with all relationships mapped.
+
+4.  **Generate Mermaid ERD:**
+    *   Convert your data model into valid Mermaid.js ERD syntax using the `erDiagram` format.
+    *   Use proper Mermaid ERD relationship notation:
+      *   `||--||` : one-to-one
+      *   `||--o{` : one-to-many
+      *   `}o--o{` : many-to-many
+      *   `||..||` : one-to-one (optional)
+      *   `||..o{` : one-to-many (optional)
+    *   For each entity, list key attributes with their types in the format: `TYPE name`
+    *   Add primary key indicators with `PK` and foreign key indicators with `FK`
+    *   Include relationship labels that describe the connection (e.g., "has", "belongs to", "contains")
+
+5.  **Create Output File:**
+    *   Create a new file named `dataModelDiagram.md` in the /.context/ directory (or update it if it already exists).
+    *   Your final output MUST be the creation of this file, containing only the complete Mermaid.js ERD code inside a markdown code block.
+
+Example of ERD output structure (CORRECT FORMAT):
+```mermaid
+erDiagram
+    USER ||--o{ POST : creates
+    USER ||--o{ COMMENT : writes
+    POST ||--o{ COMMENT : has
+    USER ||..o{ ROLE : assigned
+    ROLE }o--o{ PERMISSION : grants
+
+    USER {
+        int id PK
+        string email UK
+        string username
+        string password_hash
+        datetime created_at
+        boolean is_active
+    }
+
+    POST {
+        int id PK
+        int user_id FK
+        string title
+        text content
+        datetime published_at
+        string status
+    }
+
+    COMMENT {
+        int id PK
+        int user_id FK
+        int post_id FK
+        text content
+        datetime created_at
+    }
+
+    ROLE {
+        int id PK
+        string name UK
+        string description
+    }
+
+    PERMISSION {
+        int id PK
+        string name UK
+        string resource
+        string action
+    }
+```
+
+**CRITICAL SYNTAX RULES:**
+- Use `erDiagram` as the diagram type (not `graph`)
+- Entity names should be in UPPERCASE
+- Relationships are defined as: `ENTITY1 relationship ENTITY2 : label`
+- Attributes are defined inside curly braces after the entity name
+- Format for attributes: `type name constraints`
+- Use `PK` for primary keys, `FK` for foreign keys, `UK` for unique keys
+- Keep attribute lists focused on the most important fields (aim for 5-10 per entity)
+
+**GUIDELINES FOR CLARITY:**
+- If the project has many models (15+), consider grouping by domain or showing only core entities
+- Focus on entities that have relationships with other entities
+- Omit utility fields like `updated_at` unless they're crucial for understanding
+- Use clear relationship labels that explain the business logic
+- If there are separate schemas/databases, you may note this in comments
+
+Your final output should ONLY be this ERD visualization. Create (or update if one exists) a `dataModelDiagram.md` file in the /.context/ directory.
+"""

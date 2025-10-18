@@ -49,16 +49,28 @@ This method will only make the commands available for the current project.
 
 ## Usage
 
-Here are the custom commands included in this repository:
+Here are the custom commands included in this repository, organized by category:
 
-- `/changelog`
-- `/dockerize`
-- `/error`
-- `/performance`
-- `/plan`
-- `/security`
-- `/uiheal`
-- `/visualize`
+### Build
+
+- `/build:dockerize` - Generates a Dockerfile and docker-compose.yml for the project.
+
+### Document
+
+- `/document:changelog` - Create a change log for the recent updates.
+- `/document:performance` - Analyzes the code for potential performance bottlenecks and suggests optimizations.
+- `/document:plan` - Investigates and creates a strategic plan to accomplish a task.
+- `/document:security` - Performs a comprehensive security audit and generates a vulnerability report.
+
+### Fix
+
+- `/fix:error` - Investigate an error and perform a fix.
+- `/fix:uiheal` - Capture UI screenshots, grade them against style and UX standards.
+
+### Visualize
+
+- `/visualize:architecture` - Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase.
+- `/visualize:datamodel` - Generates an Entity-Relationship Diagram (ERD) using Mermaid.js by analyzing database models in the codebase.
 
 ## Contributing
 
