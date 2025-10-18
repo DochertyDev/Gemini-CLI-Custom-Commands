@@ -5,6 +5,7 @@ This directory contains all the custom commands that can be used with the Gemini
 - **`changelog.toml`**: Create a change log for the recent updates.
 - **`dockerize.toml`**: Generates a Dockerfile and docker-compose.yml for the project.
 - **`error.toml`**: Investigate an error and perform a fix.
+- **`performance.toml`**: Analyzes the code for potential performance bottlenecks and suggests optimizations.
 - **`plan.toml`**: Investigates and creates a strategic plan to accomplish a task.
 - **`uiheal.toml`**: Capture UI screenshots, grade them against style and UX standards.
 

@@ -54,6 +54,7 @@ Here are the custom commands included in this repository:
 - `/changelog`
 - `/dockerize`
 - `/error`
+- `/performance`
 - `/plan`
 - `/uiheal`
 
