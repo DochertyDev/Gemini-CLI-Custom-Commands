@@ -54,6 +54,7 @@ Here are the custom commands included in this repository, organized by category:
 ### Build
 
 - `/build:dockerize` - Generates a Dockerfile and docker-compose.yml for the project.
+- `/build:implement` - Creates a plan and implements based on PRD, UIDD, and SRSD.
 
 ### Design
 

@@ -5,6 +5,7 @@ This directory contains all the custom commands that can be used with the Gemini
 ### Build
 
 - **`build/dockerize.toml`**: Generates a Dockerfile and docker-compose.yml for the project.
+- **`build/implement.toml`**: Creates a plan and implements based on PRD, UIDD, and SRSD.
 
 ### Design
 
