@@ -79,6 +79,7 @@ Here are the custom commands included in this repository, organized by category:
 
 - `/visualize:architecture` - Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase.
 - `/visualize:datamodel` - Generates an Entity-Relationship Diagram (ERD) using Mermaid.js by analyzing database models in the codebase.
+- `/visualize:techstack` - Generates a diagram to visualize the tech stack.
 
 ## Contributing
 

@@ -30,6 +30,7 @@ This directory contains all the custom commands that can be used with the Gemini
 
 - **`visualize/architecture.toml`**: Generates a Mermaid.js diagram to visualize project structure by analyzing the codebase.
 - **`visualize/datamodel.toml`**: Generates an Entity-Relationship Diagram (ERD) using Mermaid.js by analyzing database models in the codebase.
+- **`visualize/techstack.toml`** - Generates a diagram to visualize the tech stack.
 
 ---
 

@@ -1,0 +1,134 @@
+description = "Generates a diagram to visualize the tech stack."
+prompt = """
+Your primary role is that of a technology analyst and systems architect. Your task is to generate a HIGH-LEVEL Mermaid.js diagram representing the project's technology stack by analyzing the codebase and dependency files.
+
+Additional context from user (if provided): {{args}}
+
+You will investigate the codebase to identify all external dependencies, frameworks, libraries, and tools, then generate a layered visualization organized by their role. You must not make any changes to the existing code.
+
+Here are the steps you MUST follow:
+
+1.  **Determine Scope:**
+    *   By default, analyze the entire project to identify all technologies used.
+    *   If `{{args}}` specifies a particular aspect or subset of the stack, adjust your analysis scope accordingly.
+
+2.  **Identify Technologies:**
+    *   Use the `glob` and `read_many_files` tools to locate and read dependency/configuration files:
+      *   **JavaScript/Node**: `package.json`, `package-lock.json`, `yarn.lock`
+      *   **Python**: `requirements.txt`, `Pipfile`, `pyproject.toml`, `setup.py`
+      *   **Ruby**: `Gemfile`, `Gemfile.lock`
+      *   **Java**: `pom.xml`, `build.gradle`, `build.gradle.kts`
+      *   **PHP**: `composer.json`
+      *   **C#/.NET**: `*.csproj`, `packages.config`
+      *   **Go**: `go.mod`
+      *   **Rust**: `Cargo.toml`
+    *   Also scan for configuration files that reveal infrastructure and tooling:
+      *   `docker-compose.yml`, `Dockerfile`
+      *   `.github/workflows/`, `.gitlab-ci.yml`, `Jenkinsfile`
+      *   `webpack.config.js`, `vite.config.js`, `rollup.config.js`
+      *   `tsconfig.json`, `babel.config.js`
+      *   Database connection strings or ORM configurations
+
+3.  **Categorize Technologies:**
+    *   Group technologies into these standard categories:
+      *   **Frontend**: UI frameworks (React, Vue, Angular), styling tools (Tailwind, SASS), state management
+      *   **Backend**: Server frameworks (Express, Django, Spring), runtime environments (Node.js, Python)
+      *   **Database**: SQL databases (PostgreSQL, MySQL), NoSQL (MongoDB, Redis), ORMs (Prisma, Sequelize)
+      *   **Infrastructure**: Containerization (Docker), CI/CD (GitHub Actions, Jenkins), cloud services (AWS, Azure)
+      *   **Testing**: Test frameworks (Jest, Pytest, JUnit), E2E tools (Cypress, Playwright)
+      *   **Build**: Bundlers (Webpack, Vite), compilers (Babel, TypeScript), package managers
+    *   **CRITICAL**: Keep each category to a MAXIMUM of 5-6 items. Group similar tools under a single node if needed.
+    *   Omit minor utility libraries. Focus on major, recognizable technologies that define the stack.
+
+4.  **Generate Mermaid Diagram:**
+    *   Convert your categorized technology stack into valid Mermaid.js syntax.
+    *   Use `graph TD;` (Top-Down) for a clear layered visualization.
+    *   **CRITICAL NODE ID RULES:**
+      *   Node IDs must be single words with NO SPACES (use camelCase or underscores)
+      *   Examples: `Frontend`, `BackendLayer`, `DevOps`, `BuildTools` (CORRECT)
+      *   Examples: `Frontend Layer`, `DevOps & Infrastructure` (WRONG - will cause errors)
+    *   Each node should represent either:
+      *   A category label (styled distinctively)
+      *   A major technology or grouped set of related tools
+    *   **Keep the total node count under 25** for readability.
+    *   Show key dependencies between technologies ONLY if they are clear and important:
+      *   `-->` for "uses" or "depends on" relationships
+      *   `-.->` for optional/plugin relationships
+    *   If dependencies make the diagram cluttered, omit them and focus on clean categorical grouping.
+    *   Use styling to visually separate categories with different colors.
+
+5.  **Create Output File:**
+    *   Create a new file named `techStackDiagram.md` in the /.context/ directory (or update it if it already exists).
+    *   Your final output MUST be the creation of this file, containing only the complete Mermaid.js code inside a markdown code block.
+
+Example of HIGH-LEVEL output structure (CORRECT FORMAT):
+```mermaid
+graph TD;
+    Frontend[Frontend Layer];
+    Backend[Backend Layer];
+    Database[Database Layer];
+    Infrastructure[Infrastructure];
+    Testing[Testing];
+    Build[Build Tools];
+
+    React[React 18];
+    Tailwind[Tailwind CSS];
+    Express[Express.js];
+    Node[Node.js];
+    Postgres[PostgreSQL];
+    Prisma[Prisma ORM];
+    Docker[Docker];
+    GHA[GitHub Actions];
+    Jest[Jest];
+    Webpack[Webpack];
+
+    Frontend --> React;
+    Frontend --> Tailwind;
+    Backend --> Express;
+    Backend --> Node;
+    Database --> Postgres;
+    Database --> Prisma;
+    Infrastructure --> Docker;
+    Infrastructure --> GHA;
+    Testing --> Jest;
+    Build --> Webpack;
+
+    React --> Webpack;
+    Express --> Node;
+    Prisma --> Postgres;
+
+    style Frontend fill:#e1f5ff;
+    style Backend fill:#fff4e1;
+    style Database fill:#e8f5e9;
+    style Infrastructure fill:#f3e5f5;
+    style Testing fill:#fff3e0;
+    style Build fill:#fce4ec;
+```
+
+**CRITICAL SYNTAX RULES TO PREVENT ERRORS:**
+- Node IDs (before the brackets) must be single words with NO SPACES
+- Use camelCase or underscores for multi-word IDs: `DevOps`, `BuildTools`, `backend_layer`
+- Labels (inside brackets) can have spaces: `[DevOps & Infrastructure]`
+- Define ALL nodes first with their labels
+- Then define ALL connections/relationships
+- End each line with a semicolon
+- In style declarations, use the node ID without spaces: `style DevOps fill:#f3e5f5;`
+
+**CRITICAL GUIDELINES FOR CLARITY:**
+- Maximum 6 categories to keep diagram simple
+- Maximum 5-6 technologies per category
+- Group minor/related tools together under one node when possible
+- Only show dependencies if they add clarity without clutter
+- Use concise labels (e.g., "React 18" not "React JavaScript Library version 18.2.0")
+- Prioritize well-known, major technologies over obscure utilities
+
+**HANDLING LARGE STACKS:**
+- If you find 20+ major technologies, consolidate by:
+  - Grouping testing libraries: "Testing: Jest, Mocha, Chai"
+  - Combining related tools: "CSS: Tailwind, PostCSS"
+  - Showing only the primary framework from each category
+- The goal is conceptual understanding, not exhaustive inventory
+- Keep it SIMPLE - fewer nodes make clearer diagrams
+
+Your final output should ONLY be this visualization. Create (or update if one exists) a `techStackDiagram.md` file in the /.context/ directory.
+"""
