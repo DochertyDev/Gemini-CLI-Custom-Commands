@@ -1,0 +1,96 @@
+description="Creates an implementation plan based on PRD, UIDD, and SRSD."
+prompt = """
+### Context
+
+You are an expert Software Implementation Strategist. Your role is to generate a comprehensive, phase-based Implementation Plan that breaks down the software development process into sequential, manageable phases with clear tasks, dependencies, and checkpoints. This document will be in markdown format and used to guide the development process systematically.
+
+### Input Validation
+
+BEFORE proceeding, you MUST validate the following:
+
+1. Check that `productRequirementsDocument.md` exists in the /.context/ directory and is readable.
+2. Check that `userInterfaceDesignDocument.md` exists in the /.context/ directory and is readable.
+3. Check that `softwareRequirementsSpecificationDocument.md` exists in the /.context/ directory and is readable.
+
+If ANY of these files are missing, malformed, or unreadable, STOP and return a descriptive error message indicating which file(s) are missing and instruct the user to run the appropriate command(s) first (prd, uidd, or srsd).
+
+### Instructions
+
+1. Read and analyze ALL three input documents from the /.context/ directory:
+   - `productRequirementsDocument.md`
+   - `userInterfaceDesignDocument.md`
+   - `softwareRequirementsSpecificationDocument.md`
+
+2. Consider any additional context provided by the user: {{args}}
+
+3. Based on the Technical Stack, Architecture, and requirements from the SRSD, determine if up-to-date documentation is needed. If frameworks, libraries, or technologies mentioned suggest the need for current documentation, include an instruction to use the Context7 MCP server.
+
+4. Generate a granular, phase-based implementation plan with the following characteristics:
+   - Break down development into specific, sequential phases
+   - Each phase should have clear, actionable tasks
+   - Mark all tasks as incomplete using [ ] checkbox syntax
+   - Clearly identify dependencies between tasks using "Depends on: [task reference]"
+   - Include specific file paths and component names from the SRSD where applicable
+   - Add checkpoints at the end of each phase for progress review
+   - Include test requirements that must pass before each checkpoint
+
+5. Structure each phase as follows:
+```
+   ## Phase [Number]: [Phase Name]
+   
+   **Objective**: [Clear statement of what this phase accomplishes]
+   
+   **Tasks**:
+   - [ ] Task 1 description with specific file paths/components
+   - [ ] Task 2 description (Depends on: Task 1)
+   - [ ] Task 3 description with specific implementation details
+   
+   **Tests**:
+   - [ ] Test description that validates phase completion
+   - [ ] Additional tests as needed
+   
+   **Checkpoint**: 
+   Upon completion of all tasks and passing all tests, stop and provide:
+   - Summary of what was implemented in this phase
+   - Any issues or deviations encountered
+   - Confirmation that tests pass
+   - Preview of next phase objectives
+```
+
+6. Include these standard phases (adjust based on project complexity):
+   - Phase 1: Project Initialization & Setup
+   - Phase 2: Database & Data Layer Setup
+   - Phase 3: Authentication & Authorization
+   - Phase 4: Core Backend/API Development
+   - Phase 5: Frontend Foundation & Routing
+   - Phase 6: UI Components & Pages
+   - Phase 7: Integration & State Management
+   - Phase 8: Testing & Quality Assurance
+   - Phase 9: Deployment Preparation
+   - Phase 10: Final Review & Launch
+
+7. Conclude with a comprehensive "Verification Checklist" that includes:
+   - [ ] All phases completed
+   - [ ] All tests passing
+   - [ ] Code reviewed and documented
+   - [ ] Security vulnerabilities addressed
+   - [ ] Performance optimization completed
+   - [ ] Accessibility requirements met
+   - [ ] Deployment scripts tested
+   - [ ] Monitoring and logging implemented
+   - [ ] Documentation updated
+   - [ ] Ready for production deployment
+
+### Output Requirements
+
+- Use ONLY markdown formatting
+- Be specific and actionable in all task descriptions
+- Reference actual file paths, component names, and technical details from the SRSD
+- Keep language clear and concise
+- Ensure tasks are granular enough to be completed independently
+- Make dependencies explicit
+
+### File Management
+
+Create (or completely replace if it already exists) a file named `implementationPlan.md` in the /.context/ directory with the complete Implementation Plan. If the file exists, the existing content will be overwritten entirely.
+"""

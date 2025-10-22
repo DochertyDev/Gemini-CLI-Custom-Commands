@@ -54,10 +54,11 @@ Here are the custom commands included in this repository, organized by category:
 ### Build
 
 - `/build:dockerize` - Generates a Dockerfile and docker-compose.yml for the project.
-- `/build:implement` - Creates a plan and implements based on PRD, UIDD, and SRSD.
+- `/build:implement` - Executes the implementation plan.
 
 ### Design
 
+- `/design:plan` - Creates an implementation plan based on the PRD, UIDD, and SRSD.
 - `/design:PRD` - Creates a Product Requirements Document.
 - `/design:SRSD` - Creates a Software Requirements Specification Document.
 - `/design:UIDD` - Creates a User Interface Design Document.
@@ -66,7 +67,7 @@ Here are the custom commands included in this repository, organized by category:
 
 - `/document:changelog` - Create a change log for the recent updates.
 - `/document:performance` - Analyzes the code for potential performance bottlenecks and suggests optimizations.
-- `/document:plan` - Investigates and creates a strategic plan to accomplish a task.
+- `/document:instructions` - Investigates and creates a strategic plan to accomplish a task.
 - `/document:security` - Performs a comprehensive security audit and generates a vulnerability report.
 
 ### Fix
