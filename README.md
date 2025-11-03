@@ -58,6 +58,7 @@ Here are the custom commands included in this repository, organized by category:
 
 ### Design
 
+- `design/options` - Creates three different implementation options with an overall recommendation.
 - `/design:plan` - Creates an implementation plan based on the PRD, UIDD, and SRSD.
 - `/design:PRD` - Creates a Product Requirements Document.
 - `/design:SRSD` - Creates a Software Requirements Specification Document.

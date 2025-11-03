@@ -9,7 +9,8 @@ This directory contains all the custom commands that can be used with the Gemini
 
 ### Design
 
-- **`/design:PRD`** - Creates a an implementation plan based on PRD, UIDD, and SRSD.
+- **`design/options`**: Creates three different implementation options with an overall recommendation.
+- **`/design:plan`** - Creates a an implementation plan based on PRD, UIDD, and SRSD.
 - **`design/PRD`**: Creates a Product Requirements Document.
 - **`design/SRSD`**: Creates a Software Requirements Specification Document.
 - **`design/UIDD`**: Creates a User Interface Design Document.
