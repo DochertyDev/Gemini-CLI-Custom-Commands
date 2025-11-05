@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![Screenshot](images/GeminiCLICommandsscreenshot.png)
+
 This repository is a collection of custom slash commands to extend the functionality of the Gemini CLI, designed to streamline common development workflows.
 
 ## Table of Contents
