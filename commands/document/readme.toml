@@ -1,0 +1,191 @@
+description="Analyzes the project and creates a structured README file."
+prompt = """
+You are an expert technical writer tasked with creating or updating a professional README.md file for this project.
+
+## Your Task
+
+1. **Investigate the Project**: Use your available tools to thoroughly explore the repository structure, understand the project's purpose, technology stack, dependencies, and functionality.
+
+2. **Create or Update README.md**: Based on your investigation, create a new README.md file (or update the existing one) in the root directory of the project. The file MUST be named `README.md` and placed at the project root.
+
+## Template Structure
+
+Your README.md must follow this exact structure and format:
+
+```markdown
+<p align="center">
+  <a href="[LINK_TO_GITHUB_URL]">
+    <img src="images/apple-touch-icon.png" width="150" alt="[YOUR_PROJECT_NAME]">
+  </a>
+</p>
+
+<h1 align="center">
+[YOUR_PROJECT_NAME]
+</h1>
+
+<h2 align="center">[SHORT_AND_CONCISE_HOOK_PHRASE]</h2>
+
+<div align="center">
+
+[![Release](https://img.shields.io/github/release/DochertyDev/[REPOSITORY_NAME])]("[RELEASE_PAGE_LINK]") [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Site](https://img.shields.io/badge/Website-github.io-2d3748.svg)]("[LINK_TO_YOUR_PROJECT_WEBSITE]") [![GitHub Stars](https://img.shields.io/github/stars/DochertyDev/[REPOSITORY_NAME])]("https://github.com/DochertyDev/[REPOSITORY_NAME]")
+
+</div>
+
+:star: _Love [YOUR_PROJECT_NAME]? Give us a star to help other developers discover it!_
+
+<br />
+
+<div>
+<img src="[PATH_TO_YOUR_SCREENSHOT]" alt="[YOUR_PROJECT_NAME] Screenshot" width="800" style="border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2); transform: perspective(1000px) rotateX(2deg); transition: transform 0.3s ease;">
+</div>
+
+>**New!**
+>[BRIEFLY_DESCRIBE_A_NEW_FEATURE_OR_ANNOUNCEMENT]
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+  - [Features](#features)
+- [Quick Start](#-quick-start-local-development)
+  - [Prerequisites](#prerequisites)
+  - [Setup Instructions](#setup-instructions)
+- [Usage](#️-usage)
+- [Technologies Used](#️-technologies-used)
+- [Security Notes](#-security-notes)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [Support the Project](#-support-the-project)
+- [Disclaimer](#️-disclaimer)
+
+## 📄 Overview
+
+[Provide a detailed overview of the project. Explain what it does, who it's for, and what problem it solves. Write this in 1-2 concise paragraphs.]
+
+### Features
+
+-   **[Feature A]:** [Briefly describe what it does.]
+-   **[Feature B]:** [Briefly describe what it does.]
+-   **[Feature C]:** [Briefly describe what it does.]
+-   **[Feature D]:** [Briefly describe what it does.]
+-   **[Feature E]:** [Briefly describe what it does.]
+
+## 🚀 Quick Start (Local Development)
+
+[Clearly state if no build process/installation is required, or provide prerequisites.]
+
+### Prerequisites
+
+[List all required software, tools, or dependencies needed before setup]
+
+### Setup Instructions
+
+1. Clone the repository:
+
+    ```sh
+    git clone https://github.com/DochertyDev/[REPOSITORY_NAME].git
+    ```
+
+2. Navigate to the project directory:
+
+    ```sh
+    cd [REPOSITORY_NAME]
+    ```
+
+3. [Next step, e.g., `npm install`]
+4. [Next step, e.g., `npm start`]
+
+## ⚙️ Usage
+
+[Provide step-by-step instructions on how to use the application.]
+
+1. **[First step to use your project...]**
+2. **[Second step...]**
+3. **[Third step...]**
+
+## 🛠️ Technologies Used
+
+- **[Technology 1]**
+- **[Technology 2]**
+- **[Technology 3]**
+- **[Technology 4]**
+
+## 🔒 Security Notes
+
+[Provide substantive, project-specific security information. Address actual security considerations relevant to the project type. Examples: client-side vs server-side processing, use of crypto APIs, local-only operation, data storage practices, authentication requirements, etc.]
+
+-   [Security Note 1: Specific to your project]
+-   [Security Note 2: Specific to your project]
+-   [Security Note 3: Specific to your project if applicable]
+
+## ❓ Troubleshooting
+
+[If this is a simple project with no common issues, state: "This is a client-side, static web application with no complex dependencies or backend. Therefore, extensive troubleshooting is generally not required." Then provide 1-2 basic troubleshooting items. Otherwise, provide specific, helpful troubleshooting entries.]
+
+**Issue**: [insert actual issue title based on common problems]
+- **Solution**: [insert detailed solution description]
+
+**Issue**: [insert actual issue title]
+- **Solution**: [insert detailed solution description]
+
+## 🤝 Contributing
+
+<div align="center">
+<a href="https://github.com/DochertyDev/[REPOSITORY_NAME]/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DochertyDev/[REPOSITORY_NAME]&max=400&columns=20"  width="100"/>
+</a>
+</div>
+
+We welcome contributions from the community! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
+
+## 🌟 Support the Project
+
+**Love [YOUR_PROJECT_NAME]?** Give us a ⭐ on GitHub!
+
+<div align="center">
+  <p>
+      <img width="800" src="https://api.star-history.com/svg?repos=DochertyDev/[REPOSITORY_NAME]&type=Date" alt="Star-history">
+  </p>
+</div>
+
+## ⚠️ Disclaimer
+
+[Insert_disclaimer_summary]
+```
+
+## Critical Instructions
+
+- **Replace ALL placeholder text** (items in [BRACKETS]) with actual, project-specific information based on your investigation.
+- **Use bullet format with hyphens (-)** for lists, not asterisks (*).
+- **Write substantive content**: Every section should contain real, meaningful information, not generic placeholders. Security notes should address actual security considerations. Troubleshooting should include realistic issues.
+- **Add nested subsections** up to one level deep, to the Table of Contents when it improves navigation (e.g., Prerequisites, Backend Setup, Multiple Usage Scenarios).
+- **If a README.md already exists** but does not follow this template structure:
+  - Preserve all valuable existing content
+  - Reorganize the content into the appropriate template sections
+  - If existing content doesn't fit standard sections, create new custom sections that make sense
+  - Maintain any project-specific details, links, or documentation
+- **Populate sections accurately** based on:
+  - Actual project files and structure
+  - Real dependencies from package.json, requirements.txt, Cargo.toml, or similar
+  - Actual scripts and commands found in the project
+  - Genuine features and functionality you discover
+- **For the "New!" announcement**: Include a real, recent feature or update if discoverable (check git history, changelog, recent commits). If none found, omit this section entirely.
+- **Be comprehensive but concise**: Write in clear, professional prose. Features should use the format `**Feature Name:** Description`.
+- **Add custom sections** for unique project aspects:
+  - Multiple installation methods (PyPI vs source, Desktop app vs Docker vs Local)
+  - Architecture diagrams
+  - Data flow diagrams
+  - Additional usage scenarios
+  - Platform-specific instructions
+- **Maintain consistent formatting**: 
+  - Use hyphens (-) for all bullet lists
+  - Use proper Markdown code blocks with language specifications
+  - Keep image styling consistent with the template
+
+## User Context
+
+{{args}}
+
+Your final output should be the creation or update of the `README.md` file in the root directory of the project.
+"""
