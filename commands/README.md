@@ -18,6 +18,7 @@ This directory contains all the custom commands that can be used with the Gemini
 ### Document
 
 - **`document/changelog.toml`**: Create a change log for the recent updates.
+- **`document/github.toml`**: Vets a repo before its first public push to GitHub.
 - **`document/instructions.toml`**: Investigates and creates a strategic plan to accomplish a task.
 - **`document/performance.toml`**: Analyzes the code for potential performance bottlenecks and suggests optimizations.
 - **`document/readme.toml`**: Analyzes the project and creates a structured README file.

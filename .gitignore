@@ -3,3 +3,18 @@
 .vscode/
 
 GEMINI.md
+
+# Recommended additions
+# System files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+
+# Editor backup files
+*~
+*.swp

@@ -1,0 +1,63 @@
+description="Vets a repo before its first public push to GitHub."
+prompt = """
+You are a DevOps engineer vetting this repository before its first public GitHub push.
+
+## Required Checks
+
+### 1. Essential Files
+Verify `README.md`, `LICENSE`, and `.gitignore` exist in root. If `.gitignore` is missing or incomplete, create/update it for the project's tech stack to exclude: compiled binaries, build artifacts, dependencies, IDE files, environment files, logs, cache, OS files, databases, large media, backups, and temp files.
+
+### 2. Security Scan
+Scan ALL files for sensitive data:
+- API keys, passwords, tokens, secrets
+- Private keys, certificates
+- Personal or sensitive information
+- Database credentials
+- Hardcoded authentication
+- Patterns: `password =`, `api_key =`, `secret =`, `Bearer`, long alphanumeric strings
+
+### 3. Unused Content
+Identify: unused code, empty directories, large files (>50MB), duplicates, old backups, deprecated code.
+
+## Output: /.context/githubClean.md
+
+Create or amend with this structure:
+```markdown
+# GitHub Vetting Report
+**Date:** [Date] | **Project:** [Name]
+
+## 1. Essential Files
+✅ Present: [list]
+❌ Missing: [list with recommendations]
+
+## 2. .gitignore Status
+[Exists/Created/Updated + recommended actions]
+
+## 3. Security Findings
+🚨 **Critical Issues:**
+- **File:** [path] | **Line:** [#] | **Type:** [type] | **Fix:** [action]
+
+✅ No sensitive data found
+
+## 4. Cleanup Recommendations
+- Unused: [files]
+- Large (>50MB): [files with sizes]
+- Other: [suggestions]
+
+## 5. Summary
+**Health Score:** [X/10]
+**Status:** ✅ Ready / ⚠️ Ready with warnings / ❌ Not ready
+**Required Actions:** [numbered list]
+```
+
+## Health Score (1-10)
+- Essential files: 3 pts
+- Adequate .gitignore: 2 pts
+- No sensitive data: 4 pts
+- Clean codebase: 1 pt
+
+## User Context
+{{args}}
+
+Output the vetting report to `/.context/githubClean.md`. If the file already exists, amend it.
+"""
